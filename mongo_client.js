@@ -7,7 +7,10 @@ app.get('/users', function(request, response){
         if(err) {
             response.send(`Error fetching all users => ${err}`);
         }
-        db.collection('users').find().toArray(function(err, docs) {
+        db.collection('users').find().toArray(function(errdb, docs) {
+            if(errdb){
+                response.send(`Error fetching all users => ${errdb}`);
+            }
             response.send(docs);
         });
     });
